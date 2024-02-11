@@ -52,16 +52,12 @@ export class ProductspageComponent implements OnInit {
   }
 
   sortByPrice() {
+    if (!this.sortByAscending) {
+      this.productsData = this.productsData.slice().sort((a: any, b: any) => a.price - b.price);
+    } else {
+      this.productsData = this.productsData.slice().sort((a: any, b: any) => b.price - a.price);
+    }
     this.sortByAscending = !this.sortByAscending;
-    console.log("sort", this.sortByAscending)
-    let num=0;
-    if(this.sortByAscending ){
-      num = 1;
-    }
-    else{
-      num =-1;
-    }
-    this.productsData = this.productsData.sort(num)
   }
 
   cardClicked(data: any, i: number) {
