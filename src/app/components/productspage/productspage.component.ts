@@ -8,7 +8,7 @@ import { MainService } from 'src/app/main.service';
 })
 export class ProductspageComponent implements OnInit {
   constructor(private mainServ: MainService) {}
-  limit: number = 10;
+  limit: number = 5;
   offset: number = 0;
   productsData: any = [];
   searchText: string = '';
@@ -31,11 +31,11 @@ export class ProductspageComponent implements OnInit {
       limit: this.limit,
     };
     this.mainServ.getProductsFakeAPI(dataToPass).subscribe((data: any) => {
-      console.log('data', data);
       if (data) {
         this.isLoading = false;
       }
-      this.productsData = [...this.productsData, ...data];
+      console.log(data)
+      this.productsData = data;
       this.limit += this.limit;
     });
   }
@@ -65,7 +65,7 @@ export class ProductspageComponent implements OnInit {
   }
 
   cardClicked(data: any, i: number) {
-    console.log('Number', i, 'data', data);
+    console.log(data,"INDEX",i)
     this.manageClickedCardColor(i);
   }
   manageClickedCardColor(index: number) {

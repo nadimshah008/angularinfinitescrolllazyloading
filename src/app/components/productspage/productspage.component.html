@@ -15,13 +15,13 @@
       <h1 *ngIf="productsData.length === 0">No Products</h1>
       <li
         class="cards"
-        [ngClass]="{ card: true, selected: selectedIndex === i }"
+        [ngClass]="{ card: true, selected: selectedIndex === product.id }"
         *ngFor="
           let product of productsData | filter : searchText;
           let i = index
         "
       >
-        <div class="iCard" (click)="cardClicked(product, i)">
+        <div class="iCard" (click)="cardClicked(product,product.id)">
           <div class="title">{{ product.title }}</div>
           <div class="description">{{ product.description }}</div>
           <div class="price">
