@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <div class="action-box">
+    <div class="search">
+      <input type="text" placeholder="Search" [(ngModel)]="searchText" />
+      <i class="fa-solid fa-magnifying-glass"></i>    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="loader" *ngIf="isLoading">Loading...</h1>
+    <ul class="products-wrapper" (scroll)="onScroll($event)">
+      <h1 *ngIf="productsData.length===0">No Products</h1>
+      <li class="cards"  [ngClass]="{'card': true, 'selected': selectedIndex === i}"*ngFor="let product of productsData | filter : searchText ; let i=index " >
+        <div  class="iCard"(click)="cardClicked(product,i)">
+        <div class="title">{{product.title}}</div>
+        <div class="description">{{product.description}}</div>
+        <div class="price"><label>Price: </label><b>{{product.price | currency:'USD'}}</b></div>
+        <div class="dates">
+          <label for="">Created Date:</label><div>{{product.creationAt | date:'shortDate'}}</div>
+        </div>
+        <div class="dates">
+          <label for="">Updated Date:</label><div>{{product.updatedAt | date:'shortDate'}}</div>
+        </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>
