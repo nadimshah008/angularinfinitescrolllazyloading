@@ -1,5 +1,9 @@
 .wrapper{
   font-size: 10px;
+  .action-box{
+    display: flex;
+    align-items: center;
+  }
 
   .container{
 
@@ -59,4 +63,12 @@
 
 .selected{
   background: crimson !important;
+
+}
+.sort{
+  background: green;
+  color: #fff;
+  font-size: 25px;
+  padding: 20px;
+  cursor: pointer;
 }

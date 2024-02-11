@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseURL:'https://api.escuelajs.co/api/v1/'
+  baseURL:'https://api.escuelajs.co/api/v1/',
+  fakeAPIURL:'https://fakestoreapi.com/products'
 };
 
 /*

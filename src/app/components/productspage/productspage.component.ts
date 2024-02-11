@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MainService } from 'src/app/main.service';
+import * as products from '../../../assets/data/data.json';
 
 @Component({
   selector: 'app-productspage',
@@ -13,8 +14,11 @@ export class ProductspageComponent implements OnInit {
   productsData: any = [];
   searchText: string = '';
   selectedIndex: any;
-  isLoading:boolean= true;
+  isLoading: boolean = true;
+  sortByAscending: boolean = false;
+  totalLength:number=20;
   ngOnInit(): void {
+    console.log("products",products);
     this.getProducts();
     if (localStorage.getItem('selectedCardIndex')) {
       this.selectedIndex = parseInt(
@@ -24,18 +28,17 @@ export class ProductspageComponent implements OnInit {
   }
 
   getProducts() {
-    this.isLoading= true;
+    this.isLoading = true;
     let dataToPass = {
       limit: this.limit,
-      offset: this.offset,
     };
-    this.mainServ.getProducts(dataToPass).subscribe((data: any) => {
+    this.mainServ.getProductsFakeAPI(dataToPass).subscribe((data: any) => {
       console.log('data', data);
-      if(data){
-        this.isLoading=false;
+      if (data) {
+        this.isLoading = false;
       }
       this.productsData = [...this.productsData, ...data];
-      this.offset += this.limit;
+      this.limit += this.limit;
     });
   }
 
@@ -44,8 +47,23 @@ export class ProductspageComponent implements OnInit {
       event.target.offsetHeight + event.target.scrollTop >=
       event.target.scrollHeight
     ) {
+      if(this.limit <= this.totalLength){
       this.getProducts();
+      }
     }
+  }
+
+  sortByPrice() {
+    this.sortByAscending = !this.sortByAscending;
+    console.log("sort", this.sortByAscending)
+    let num=0;
+    if(this.sortByAscending ){
+      num = 1;
+    }
+    else{
+      num =-1;
+    }
+    this.productsData = this.productsData.sort(num)
   }
 
   cardClicked(data: any, i: number) {
