@@ -15,7 +15,7 @@ export class ProductspageComponent implements OnInit {
   selectedIndex: any;
   isLoading: boolean = true;
   sortByAscending: boolean = false;
-  totalLength:number=20;
+  totalLength: number = 20;
   ngOnInit(): void {
     this.getProducts();
     if (localStorage.getItem('selectedCardIndex')) {
@@ -45,17 +45,21 @@ export class ProductspageComponent implements OnInit {
       event.target.offsetHeight + event.target.scrollTop >=
       event.target.scrollHeight
     ) {
-      if(this.limit <= this.totalLength){
-      this.getProducts();
+      if (this.limit <= this.totalLength) {
+        this.getProducts();
       }
     }
   }
 
   sortByPrice() {
     if (!this.sortByAscending) {
-      this.productsData = this.productsData.slice().sort((a: any, b: any) => a.price - b.price);
+      this.productsData = this.productsData
+        .slice()
+        .sort((a: any, b: any) => a.price - b.price);
     } else {
-      this.productsData = this.productsData.slice().sort((a: any, b: any) => b.price - a.price);
+      this.productsData = this.productsData
+        .slice()
+        .sort((a: any, b: any) => b.price - a.price);
     }
     this.sortByAscending = !this.sortByAscending;
   }
