@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MainService } from 'src/app/main.service';
-import * as products from '../../../assets/data/data.json';
 
 @Component({
   selector: 'app-productspage',
@@ -18,7 +17,6 @@ export class ProductspageComponent implements OnInit {
   sortByAscending: boolean = false;
   totalLength:number=20;
   ngOnInit(): void {
-    console.log("products",products);
     this.getProducts();
     if (localStorage.getItem('selectedCardIndex')) {
       this.selectedIndex = parseInt(
